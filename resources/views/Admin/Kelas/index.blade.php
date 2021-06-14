@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Kelas</h1>
+    <h1>Data Kelas</h1>
 @stop
 
 @section('content')
@@ -27,7 +27,11 @@
                     <td>{{ $item->guru->nama }}</td>
                     <td>
                         <a class="btn btn-warning btn-sm" href="{{ route('kelas.edit', $item->id) }}">Edit</a>
-                        <a class="btn btn-danger btn-sm" href="{{ route('kelas.destroy', $item->id) }}">Delete</a>
+                        <form action="{{ route('kelas.destroy', $item->id) }}" class="d-inline" method="post">
+                            @csrf
+                            @method('delete')
+                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

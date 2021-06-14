@@ -69,7 +69,13 @@ class KelasController extends Controller
      */
     public function edit(Kelas $kelas)
     {
-        //
+        $data = [
+            'kelas' => Kelas::where('id', $kelas->id)->first(),
+            'guru' => Guru::all()
+
+        ];
+        // dd($data);
+        return view('Admin.Kelas.edit', $data);
     }
 
     /**
@@ -81,7 +87,11 @@ class KelasController extends Controller
      */
     public function update(Request $request, Kelas $kelas)
     {
-        //
+        $request->validate([
+            'nama' => ['required']
+        ]);
+        $kelas->update($request->all());
+        return redirect()->route('kelas.index');
     }
 
     /**
@@ -92,6 +102,7 @@ class KelasController extends Controller
      */
     public function destroy(Kelas $kelas)
     {
-        //
+        $kelas->delete();
+        return redirect()->route('kelas.index');
     }
 }

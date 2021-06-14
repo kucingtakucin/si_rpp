@@ -3,13 +3,14 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Kelas</h1>
+    <h1>Tambah Kelas</h1>
 @stop
 
 @section('content')
     <p>Tambah kelas</p>
 
     {{-- With label, invalid feedback disabled and form group class --}}
+    {{-- /kelas/store --}}
     <form action="{{ route('kelas.store') }}" method="post">
         @csrf
         @method('post')

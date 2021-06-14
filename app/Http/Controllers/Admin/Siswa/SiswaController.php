@@ -49,7 +49,7 @@ class SiswaController extends Controller
             'id_kelas' => ['required'],
         ]);
         Siswa::create($request->all());
-        return redirect()->route('siswa.index');
+        return redirect()->route('siswa.index')->with('success', 'Berhasil Ditambahkan');
     }
 
     /**
@@ -93,10 +93,9 @@ class SiswaController extends Controller
             'nis' => ['required'],
             'nama' => ['required'],
             'id_kelas' => ['required'],
-
         ]);
         $siswa->update($request->all());
-        return redirect()->route('siswa.index');
+        return redirect()->route('siswa.index')->with('success', 'Berhasil Diubah');
     }
 
     /**

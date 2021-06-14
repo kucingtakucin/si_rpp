@@ -1,4 +1,6 @@
 @extends('adminlte::page')
+@section('plugins.Jquery', true)
+@section('plugins.SweetAlert2', true)
 
 @section('title', 'Dashboard')
 
@@ -27,10 +29,29 @@
             <td>{{ $item->kelas->nama }}</td>
             <td>
                 <a class="btn btn-warning btn-sm" href="{{ route('siswa.edit', $item->id) }}">Edit</a>
-                <a class="btn btn-danger btn-sm" href="{{ route('siswa.destroy', $item->id) }}">Delete</a>
+                <form action="{{ route('siswa.destroy', $item->id) }}" class="d-inline" method="post">
+                    @csrf
+                    @method('delete')
+                    <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                </form>
             </td>
         </tr>
         @endforeach
     </tbody>
 </table>
+@stop
+
+
+@section('adminlte_js')
+<script>
+    $(document).ready(function() {
+        if (document.getElementById('pesan-success')) {
+            Swal.fire(
+                'Data Siswa',
+                `${$('#pesan-success').data('message')}`,
+                'success'
+            )
+        }
+    })
+</script>
 @stop

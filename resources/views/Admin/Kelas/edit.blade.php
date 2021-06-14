@@ -10,16 +10,16 @@
 <p>Ubah kelas</p>
 
 {{-- With label, invalid feedback disabled and form group class --}}
-<form action="{{ route('kelas.store') }}" method="post">
+<form action="{{ route('kelas.update', $kelas->id) }}" method="post">
     @csrf
-    @method('post')
+    @method('put')
     <div class="row">
         <x-adminlte-input name="nama" label="Nama" placeholder="Nama Kelas" fgroup-class="col-md-6" value="{{ $kelas->nama }}" />
         {{-- With prepend slot, label and data-placeholder config --}}
         <x-adminlte-select2 name="id_guru" label="Guru" label-class="text-lightblue" igroup-size="lg" data-placeholder="Select an option...">
             <x-slot name="prependSlot">
                 <div class="input-group-text bg-gradient-info">
-                    <i class="fas fa-car-side"></i>
+                    <i class="fas fa-user"></i>
                 </div>
             </x-slot>
             <option />

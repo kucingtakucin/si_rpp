@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::redirect('/', '/admin');
+
 Auth::routes();
 Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', HomeController::class)->name('home');

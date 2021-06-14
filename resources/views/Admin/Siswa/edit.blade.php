@@ -10,12 +10,12 @@
 <p>Ubah kelas</p>
 
 {{-- With label, invalid feedback disabled and form group class --}}
-<form action="{{ route('siswa.store') }}" method="post">
+<form action="{{ route('siswa.update', $siswa->id) }}" method="post">
     @csrf
-    @method('post')
+    @method('put')
     <div class="row">
-        <x-adminlte-input name="nis" label="NIS" placeholder="Nomor Induk Siswa" fgroup-class="col-md-6" />
-        <x-adminlte-input name="nama" label="Nama" placeholder="Nama Siswa" fgroup-class="col-md-6" />
+        <x-adminlte-input name="nis" label="NIS" placeholder="Nomor Induk Siswa" value="{{  $siswa->nis }}" fgroup-class="col-md-6" />
+        <x-adminlte-input name="nama" label="Nama" placeholder="Nama Siswa" value="{{  $siswa->nama  }}" fgroup-class="col-md-6" />
         <x-adminlte-select2 name="id_kelas" label="Kelas" label-class="text-lightblue" igroup-size="lg" data-placeholder="Select an option...">
             <x-slot name="prependSlot">
                 <div class="input-group-text bg-gradient-info">

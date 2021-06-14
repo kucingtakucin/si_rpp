@@ -10,9 +10,9 @@
     <p>Ubah kelas</p>
 
     {{-- With label, invalid feedback disabled and form group class --}}
-    <form action="{{ route('kelas.store') }}" method="post">
+    <form action="{{ route('kelas.update', $kelas->id) }}" method="post">
         @csrf
-        @method('post')
+        @method('put')
         <div class="row">
             <x-adminlte-input name="nama" label="Nama" placeholder="Nama Kelas" fgroup-class="col-md-6"
                 value="{{ $kelas->nama }}" />

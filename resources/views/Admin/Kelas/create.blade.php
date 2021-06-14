@@ -1,4 +1,5 @@
 @extends('adminlte::page')
+@section('plugins.Select2', true)
 
 @section('title', 'Dashboard')
 
@@ -17,8 +18,8 @@
         <div class="row">
             <x-adminlte-input name="nama" label="Nama" placeholder="Nama Kelas" fgroup-class="col-md-6" />
             {{-- With prepend slot, label and data-placeholder config --}}
-            <x-adminlte-select2 name="id_guru" label="Guru" label-class="text-lightblue" igroup-size="lg"
-                data-placeholder="Select an option...">
+            <x-adminlte-select2 name="id_guru" label="Guru" label-class="text-lightblue" fgroup-class="col-md-6"
+                igroup-size="lg" data-placeholder="Select an option...">
                 <x-slot name="prependSlot">
                     <div class="input-group-text bg-gradient-info">
                         <i class="fas fa-car-side"></i>

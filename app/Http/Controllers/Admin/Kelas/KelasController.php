@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Guru;
 use App\Models\Kelas;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class KelasController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -25,7 +26,7 @@ class KelasController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -38,8 +39,8 @@ class KelasController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -48,14 +49,14 @@ class KelasController extends Controller
             'id_guru' => ['required'],
         ]);
         Kelas::create($request->all());
-        return redirect()->route('kelas.index');
+        return redirect()->route('kelas.index')->with('success', 'Berhasil Ditambahkan');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
+     * @param  Kelas  $kelas
+     * @return Response
      */
     public function show(Kelas $kelas)
     {
@@ -65,8 +66,8 @@ class KelasController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
+     * @param  Kelas  $kelas
+     * @return Response
      */
     public function edit(Kelas $kelas)
     {
@@ -82,30 +83,29 @@ class KelasController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  Kelas  $kelas
+     * @return Response
      */
     public function update(Request $request, Kelas $kelas)
     {
         $request->validate([
             'nama' => ['required'],
             'id_guru' => ['required'],
-
         ]);
         $kelas->update($request->all());
-        return redirect()->route('kelas.index');
+        return redirect()->route('kelas.index')->with('success', 'Berhasil Diubah');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Kelas  $kelas
-     * @return \Illuminate\Http\Response
+     * @param  Kelas  $kelas
+     * @return Response
      */
     public function destroy(Kelas $kelas)
     {
         $kelas->delete();
-        return redirect()->route('kelas.index');
+        return redirect()->route('kelas.index')->with('success', 'Berhasil Dihapus');
     }
 }

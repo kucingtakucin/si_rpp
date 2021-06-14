@@ -30,7 +30,7 @@ class KelasController extends Controller
     public function create()
     {
         $data = [
-            'guru' => Guru::all()
+            'guru' => Guru::all(),
         ];
         return view('Admin.Kelas.create', $data);
     }
@@ -44,7 +44,8 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => ['required']
+            'nama' => ['required'],
+            'id_guru' => ['required'],
         ]);
         Kelas::create($request->all());
         return redirect()->route('kelas.index');
@@ -88,7 +89,9 @@ class KelasController extends Controller
     public function update(Request $request, Kelas $kelas)
     {
         $request->validate([
-            'nama' => ['required']
+            'nama' => ['required'],
+            'id_guru' => ['required'],
+
         ]);
         $kelas->update($request->all());
         return redirect()->route('kelas.index');

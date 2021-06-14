@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Siswa;
 
 use App\Http\Controllers\Controller;
+use App\Models\Kelas;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,10 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        $data = [
+            'siswa' => Siswa::with(['kelas'])->get()
+        ];
+        return view('Admin.Siswa.index', $data);
     }
 
     /**
@@ -25,7 +29,10 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'kelas' => Kelas::all()
+        ];
+        return view('Admin.Siswa.create', $data);
     }
 
     /**
@@ -36,7 +43,13 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nis' => ['required'],
+            'nama' => ['required'],
+            'id_kelas' => ['required'],
+        ]);
+        Siswa::create($request->all());
+        return redirect()->route('siswa.index');
     }
 
     /**
@@ -58,7 +71,13 @@ class SiswaController extends Controller
      */
     public function edit(Siswa $siswa)
     {
-        //
+        $data = [
+            'siswa' => Siswa::where('id', $siswa->id)->first(),
+            'kelas' => Kelas::all()
+
+        ];
+        // dd($data);
+        return view('Admin.Siswa.edit', $data);
     }
 
     /**
@@ -70,7 +89,14 @@ class SiswaController extends Controller
      */
     public function update(Request $request, Siswa $siswa)
     {
-        //
+        $request->validate([
+            'nis' => ['required'],
+            'nama' => ['required'],
+            'id_kelas' => ['required'],
+
+        ]);
+        $siswa->update($request->all());
+        return redirect()->route('siswa.index');
     }
 
     /**
@@ -81,6 +107,7 @@ class SiswaController extends Controller
      */
     public function destroy(Siswa $siswa)
     {
-        //
+        $siswa->delete();
+        return redirect()->route('siswa.index');
     }
 }

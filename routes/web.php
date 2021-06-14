@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\Home\HomeController;
 use App\Http\Controllers\Admin\Kelas\KelasController;
+use App\Http\Controllers\Admin\Siswa\SiswaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,7 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     Route::resource('kelas', KelasController::class)->parameters(['kelas' => 'kelas']);
 
     // Siswa
+    Route::resource('siswa', SiswaController::class)->parameters(['siswa' => 'siswa']);
     /* ... */
 
     // Guru

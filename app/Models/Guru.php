@@ -10,9 +10,10 @@ class Guru extends Model
     use HasFactory;
 
     protected $table = 'guru';
+    protected $fillable = ['nik', 'nama'];
 
-    public function kelas()
-    {
-        return $this->hasOne(Kelas::class, 'id_kelas', 'id');
-    }
+    // public function guru()
+    // {
+    //     // return $this->hasOne(Guru::class, 'id_guru', 'id');
+    // }
 }

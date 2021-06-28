@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Guru;
 use App\Http\Controllers\Controller;
 use App\Models\Guru;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class GuruController extends Controller
 {
@@ -15,7 +16,12 @@ class GuruController extends Controller
      */
     public function index()
     {
-        //
+        // $guru = Guru::all();
+        // return view('Admin.Guru.index', ['guru' => $guru]);
+        $data = [
+            'guru' => Guru::all()
+        ];
+        return view('Admin.Guru.index', $data);
     }
 
     /**
@@ -25,7 +31,10 @@ class GuruController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'guru' => Guru::all(),
+        ];
+        return view('Admin.Guru.create', $data);
     }
 
     /**
@@ -36,7 +45,12 @@ class GuruController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nik' => ['required'],
+            'nama' => ['required'],
+        ]);
+        Guru::create($request->all());
+        return redirect()->route('guru.index')->with('success', 'Berhasil Ditambahkan');
     }
 
     /**
@@ -53,24 +67,34 @@ class GuruController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Guru  $guru
-     * @return \Illuminate\Http\Response
+     * @param  Guru  $guru
+     * @return Response
      */
     public function edit(Guru $guru)
     {
-        //
+        $data = [
+            'guru' => $guru,
+        ];
+
+        dd($guru);
+        return view('Admin.Guru.edit', $data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Guru  $guru
-     * @return \Illuminate\Http\Response
+     * @param  Request  $request
+     * @param  Guru  $guru
+     * @return Response
      */
     public function update(Request $request, Guru $guru)
     {
-        //
+        $request->validate([
+            'nik' => ['required'],
+            'nama' => ['required'],
+        ]);
+        $guru->update($request->all());
+        return redirect()->route('guru.index')->with('success', 'Berhasil Diubah');
     }
 
     /**
@@ -81,6 +105,7 @@ class GuruController extends Controller
      */
     public function destroy(Guru $guru)
     {
-        //
+        $guru->delete();
+        return redirect()->route('guru.index')->with('success', 'Berhasil Dihapus');
     }
 }

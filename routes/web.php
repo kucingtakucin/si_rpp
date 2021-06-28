@@ -28,12 +28,13 @@ Route::middleware('auth')->prefix('admin')->group(function () {
 
     // Kelas
     Route::resource('kelas', KelasController::class)->parameters(['kelas' => 'kelas']);
+    Route::get('kelas/data', [KelasController::class, 'data']);
 
     // Siswa
     Route::resource('siswa', SiswaController::class)->parameters(['siswa' => 'siswa']);
-    /* ... */
+    Route::get('siswa/data', [SiswaController::class, 'data']);
 
     // Guru
     Route::resource('guru', GuruController::class)->parameters(['guru' => 'guru']);
-    /* ... */
+    Route::get('guru/data', [GuruController::class, 'data']);
 });

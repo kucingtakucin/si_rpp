@@ -52,6 +52,11 @@ class SiswaController extends Controller
         return redirect()->route('siswa.index')->with('success', 'Berhasil Ditambahkan');
     }
 
+    public function data()
+    {
+        return response()->json(Siswa::all());
+    }
+
     /**
      * Display the specified resource.
      *
@@ -60,7 +65,7 @@ class SiswaController extends Controller
      */
     public function show(Siswa $siswa)
     {
-        //
+        return response()->json(Siswa::find($siswa));
     }
 
     /**

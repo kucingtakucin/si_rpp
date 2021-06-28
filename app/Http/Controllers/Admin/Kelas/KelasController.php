@@ -52,6 +52,11 @@ class KelasController extends Controller
         return redirect()->route('kelas.index')->with('success', 'Berhasil Ditambahkan');
     }
 
+    public function data()
+    {
+        return response()->json(Kelas::all());
+    }
+
     /**
      * Display the specified resource.
      *
@@ -60,7 +65,7 @@ class KelasController extends Controller
      */
     public function show(Kelas $kelas)
     {
-        //
+        return response()->json(Kelas::find($kelas));
     }
 
     /**

@@ -12,8 +12,8 @@ class Guru extends Model
     protected $table = 'guru';
     protected $fillable = ['nik', 'nama'];
 
-    // public function guru()
-    // {
-    //     // return $this->hasOne(Guru::class, 'id_guru', 'id');
-    // }
+    public function kelas()
+    {
+        return $this->hasOne(Kelas::class);
+    }
 }

@@ -14,6 +14,7 @@
     @if (session()->has('success'))
         <div id="pesan-success" data-status="success" data-message="{{ session()->get('success') }}"></div>
     @endif
+
     <table class="table table-striped mt-3">
         <thead>
             <tr>
@@ -31,10 +32,10 @@
                     <td>{{ $item->guru->nama }}</td>
                     <td>
                         <a class="btn btn-warning btn-sm" href="{{ route('kelas.edit', $item->id) }}">Edit</a>
-                        <form action="{{ route('kelas.destroy', $item->id) }}" class="d-inline" method="post">
+                        <form action="{{ route('kelas.destroy', $item->id) }}" class="d-inline form_hapus" method="post">
                             @csrf
                             @method('delete')
-                            <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                            <button class="btn btn-danger btn-sm tombol_hapus" type="submit">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -53,7 +54,26 @@
                     'success'
                 )
             }
-        })
 
+            $('.tombol_hapus').click(function(event) {
+                event.preventDefault()
+                event.stopPropagation()
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        $(this).parent().submit()
+                    }
+                })
+            })
+
+        })
     </script>
 @stop

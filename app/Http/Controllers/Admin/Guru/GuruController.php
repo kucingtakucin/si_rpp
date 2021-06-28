@@ -53,15 +53,20 @@ class GuruController extends Controller
         return redirect()->route('guru.index')->with('success', 'Berhasil Ditambahkan');
     }
 
+    public function data()
+    {
+        return response()->json(Guru::all());
+    }
+
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Guru  $guru
      * @return \Illuminate\Http\Response
      */
-    public function show(Guru $guru)
+    public function show(Guru $guru = null)
     {
-        //
+        return response()->json(Guru::find($guru));
     }
 
     /**
@@ -73,10 +78,8 @@ class GuruController extends Controller
     public function edit(Guru $guru)
     {
         $data = [
-            'guru' => $guru,
+            'guru' => Guru::where('id', $guru->id)->first(),
         ];
-
-        dd($guru);
         return view('Admin.Guru.edit', $data);
     }
 
